@@ -78,20 +78,43 @@ public class DailyProblem {
         int b = nums[1];
         int c = nums[2];
 
-        if(a + b <= c || b + c <= a || c + a <= b){
+        if (a + b <= c || b + c <= a || c + a <= b) {
             return "none";
         }
-        if(a==b && b==c){
+        if (a == b && b == c) {
             return "equilateral";
         }
-        if(a == b || b == c || c == a){
+        if (a == b || b == c || c == a) {
             return "isosceles";
         }
         return "scalene";
 
     }
 
+
+    public static boolean isZeroArray(int[] nums, int[][] queries) {
+        int[] delta = new int[nums.length + 1];
+        for (int[] q : queries) {
+            delta[q[0]]++;
+            delta[q[1] + 1]--;
+        }
+
+        for (int i = 1; i < delta.length; i++) {
+            delta[i] = delta[i - 1] + delta[i];
+        }
+
+        for(int i=0; i< nums.length; i++){
+            if(delta[i] < nums[i])
+                return false;
+        }
+        return true;
+    }
+
+
+
     public static void main(String[] args) {
-        System.out.println(lengthAfterTransformations("abcyy", 2));
+        int [] nums = {1,0,1};
+        int [][] queries = {{0,2}};
+        System.out.println(isZeroArray(nums, queries));
     }
 }
