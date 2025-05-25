@@ -103,8 +103,8 @@ public class DailyProblem {
             delta[i] = delta[i - 1] + delta[i];
         }
 
-        for(int i=0; i< nums.length; i++){
-            if(delta[i] < nums[i])
+        for (int i = 0; i < nums.length; i++) {
+            if (delta[i] < nums[i])
                 return false;
         }
         return true;
@@ -124,11 +124,38 @@ public class DailyProblem {
         return ans;
     }
 
+    public static int longestPalindrome(String[] words) {
+        Map<String, Integer> map = new HashMap<>();
+
+        for (String word : words) {
+            Integer previousCount = map.getOrDefault(word, 0);
+            map.put(word, previousCount + 1);
+        }
+
+        int counter = 0;
+        boolean isSameCharPairTaken = false;
+
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if (entry.getKey().charAt(0) == entry.getKey().charAt(1)) {
+                if (entry.getValue() % 2 != 0) {
+                    if (!isSameCharPairTaken) {
+                        counter++;
+                        isSameCharPairTaken = true;
+                    }
+                }
+                counter += (entry.getValue() / 2 ) * 2;
+
+            } else {
+                StringBuilder reverse = new StringBuilder(entry.getKey()).reverse();
+                counter += Math.min(entry.getValue(), map.getOrDefault(reverse.toString(), 0));
+            }
+        }
+        return counter * 2;
+    }
 
 
     public static void main(String[] args) {
-        int [] nums = {1,0,1};
-        int [][] queries = {{0,2}};
-        System.out.println(isZeroArray(nums, queries));
+        String[] words = {"dd","aa","bb","dd","aa","dd","bb","dd","aa","cc","bb","cc","dd","cc"};
+        System.out.println(longestPalindrome(words));
     }
 }
