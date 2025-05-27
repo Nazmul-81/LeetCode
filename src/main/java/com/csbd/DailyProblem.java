@@ -143,7 +143,7 @@ public class DailyProblem {
                         isSameCharPairTaken = true;
                     }
                 }
-                counter += (entry.getValue() / 2 ) * 2;
+                counter += (entry.getValue() / 2) * 2;
 
             } else {
                 StringBuilder reverse = new StringBuilder(entry.getKey()).reverse();
@@ -153,9 +153,19 @@ public class DailyProblem {
         return counter * 2;
     }
 
+    public static int differenceOfSums(int n, int m) {
+        int sum = (n * (n + 1)) / 2;
+        int num2 = 0;
+        for (int i = m; i <= n; i += m) {
+            num2 += i;
+        }
+        return sum - (num2 * 2);
+    }
+
 
     public static void main(String[] args) {
-        String[] words = {"dd","aa","bb","dd","aa","dd","bb","dd","aa","cc","bb","cc","dd","cc"};
+        System.out.println();
+        String[] words = {"dd", "aa", "bb", "dd", "aa", "dd", "bb", "dd", "aa", "cc", "bb", "cc", "dd", "cc"};
         System.out.println(longestPalindrome(words));
     }
 }
