@@ -162,6 +162,25 @@ public class DailyProblem {
         return sum - (num2 * 2);
     }
 
+    public static int minMaxDifference(int num) {
+        String numStr = String.valueOf(num);
+        char[] digits = numStr.toCharArray();
+        int minDigit = Character.getNumericValue(digits[0]);
+
+        for (char digit : digits) {
+            int currentDigit = Character.getNumericValue(digit);
+            if (currentDigit < minDigit) {
+                minDigit = currentDigit;
+            }
+
+        }
+
+        int maxValue = Integer.parseInt(numStr.replace(String.valueOf(minDigit), "9"));
+        int minValue = Integer.parseInt(numStr.replace(String.valueOf(digits[0]), "0"));
+
+        return maxValue - minValue;
+    }
+
 
     public static void main(String[] args) {
         System.out.println();
