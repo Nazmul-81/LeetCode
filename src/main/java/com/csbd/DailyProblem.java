@@ -182,6 +182,54 @@ public class DailyProblem {
     }
 
 
+    public int maxDiff(int num) {
+        String numStr = String.valueOf(num);
+        char[] digits = numStr.toCharArray();
+
+        int ans = 0;
+
+        for (int i = 0; i <= 9; i++) {
+            for (int ii = 0; ii < digits.length; ii++) {
+                char maxCharToReplace = digits[ii];
+                int maxValue = Integer.parseInt(numStr.replace(String.valueOf(maxCharToReplace), i + ""));
+                if( maxValue < num) {
+                    continue;
+                }
+
+                for (int j = 0; j <= 9; j++) {
+                    for (int jj = 0; jj < digits.length; jj++) {
+                        char minCharToReplace = digits[jj];
+                        int minValue = Integer.parseInt(numStr.replace(String.valueOf(minCharToReplace), j + ""));
+                        if(minValue == 0 || digits.length != String.valueOf(minValue).length()) {
+                            continue;
+                        }
+
+                        ans = Math.max(ans, maxValue - minValue);
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    public int maximumDifference(int[] nums) {
+        int maxDiff = -1;
+        int minValue = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > minValue) {
+                maxDiff = Math.max(maxDiff, nums[i] - minValue);
+            } else {
+                minValue = Math.min(minValue, nums[i]);
+            }
+        }
+
+        return maxDiff;
+    }
+
+
+
     public static void main(String[] args) {
         System.out.println();
         String[] words = {"dd", "aa", "bb", "dd", "aa", "dd", "bb", "dd", "aa", "cc", "bb", "cc", "dd", "cc"};
