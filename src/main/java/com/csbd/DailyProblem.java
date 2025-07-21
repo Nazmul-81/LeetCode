@@ -192,7 +192,7 @@ public class DailyProblem {
             for (int ii = 0; ii < digits.length; ii++) {
                 char maxCharToReplace = digits[ii];
                 int maxValue = Integer.parseInt(numStr.replace(String.valueOf(maxCharToReplace), i + ""));
-                if( maxValue < num) {
+                if (maxValue < num) {
                     continue;
                 }
 
@@ -200,7 +200,7 @@ public class DailyProblem {
                     for (int jj = 0; jj < digits.length; jj++) {
                         char minCharToReplace = digits[jj];
                         int minValue = Integer.parseInt(numStr.replace(String.valueOf(minCharToReplace), j + ""));
-                        if(minValue == 0 || digits.length != String.valueOf(minValue).length()) {
+                        if (minValue == 0 || digits.length != String.valueOf(minValue).length()) {
                             continue;
                         }
 
@@ -228,6 +228,25 @@ public class DailyProblem {
         return maxDiff;
     }
 
+    public String makeFancyString(String s) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(s.charAt(0));
+
+        int count = 1;
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                count++;
+            } else {
+                count = 1;
+            }
+            if (count < 3) {
+                sb.append(s.charAt(i));
+            }
+        }
+
+        return sb.toString();
+    }
 
 
     public static void main(String[] args) {
